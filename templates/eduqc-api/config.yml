@@ -2,7 +2,4 @@ name: Eduqc
 description: |
   Catalog to Eduqc-api
 version: 0.1
-category: # Category to be used for searching catalog entries
-maintainer: # The maintainer of the catalog entry
-license: # The license
-projectURL: # A URL related to the catalog entry
+category: "Cloud Management Platform"
