@@ -1,0 +1,312 @@
+version: '2'
+services:
+  api-questions:
+    image: registry.gitlab.com/eduqc/api-questions:latest
+    environment:
+      MONGO_PORT: '27017'
+      MONGO_USER: admin
+      MONGO_PASS: admin
+      MONGO_DBNAME: eduqc
+      MONGO_HOST: mongodb://eduqc:wbgnNG25GjIvBuTW@devcluster-shard-00-00-a3weg.gcp.mongodb.net:27017,devcluster-shard-00-01-a3weg.gcp.mongodb.net:27017,devcluster-shard-00-02-a3weg.gcp.mongodb.net:27017/admin?replicaSet=DevCluster-shard-0&ssl=true
+    stdin_open: true
+    entrypoint:
+    - python
+    - api.py
+    tty: true
+    labels:
+      io.rancher.container.pull_image: always
+      io.rancher.container.hostname_override: container_name
+  api-email:
+    image: registry.gitlab.com/eduqc/eduqc-services:latest
+    environment:
+      MONGO_PORT: '27017'
+      MONGO_USER: admin
+      MONGO_PASS: admin
+      MONGO_DBNAME: eduqc
+      MONGO_HOST: mongodb://eduqc:wbgnNG25GjIvBuTW@devcluster-shard-00-00-a3weg.gcp.mongodb.net:27017,devcluster-shard-00-01-a3weg.gcp.mongodb.net:27017,devcluster-shard-00-02-a3weg.gcp.mongodb.net:27017/admin?replicaSet=DevCluster-shard-0&ssl=true
+    stdin_open: true
+    tty: true
+    command:
+    - python
+    - api.py
+    labels:
+      io.rancher.container.pull_image: always
+      io.rancher.container.hostname_override: container_name
+  lb-api:
+    image: rancher/lb-service-haproxy:v0.7.15
+    expose:
+    - 8000:8000/tcp
+    labels:
+      io.rancher.container.agent.role: environmentAdmin,agent
+      io.rancher.container.agent_service.drain_provider: 'true'
+      io.rancher.container.create_agent: 'true'
+  question-history:
+    image: registry.gitlab.com/eduqc/question-history:latest
+    environment:
+      MONGO_PORT: '27017'
+      MONGO_USER: admin
+      MONGO_PASS: admin
+      MONGO_DBNAME: eduqc
+      MONGO_HOST: mongodb://eduqc:wbgnNG25GjIvBuTW@devcluster-shard-00-00-a3weg.gcp.mongodb.net:27017,devcluster-shard-00-01-a3weg.gcp.mongodb.net:27017,devcluster-shard-00-02-a3weg.gcp.mongodb.net:27017/admin?replicaSet=DevCluster-shard-0&ssl=true
+    stdin_open: true
+    tty: true
+    command:
+    - python
+    - api.py
+    labels:
+      io.rancher.container.pull_image: always
+      io.rancher.container.hostname_override: container_name
+  theta-history:
+    image: registry.gitlab.com/eduqc/theta-history:latest
+    environment:
+      MONGO_PORT: '27017'
+      SENTRY_DSN: https://04b827db99fd4c44abbad13c745eeb4b:a9a60914e31d4f9e976d064614ce1dfb@sentry.io/223014
+      MONGO_DBNAME: eduqc
+      MONGO_USER: admin
+      MONGO_HOST: mongodb://eduqc:wbgnNG25GjIvBuTW@devcluster-shard-00-00-a3weg.gcp.mongodb.net:27017,devcluster-shard-00-01-a3weg.gcp.mongodb.net:27017,devcluster-shard-00-02-a3weg.gcp.mongodb.net:27017/admin?replicaSet=DevCluster-shard-0&ssl=true
+      MONGO_PASS: admin
+    stdin_open: true
+    tty: true
+    logging:
+      driver: syslog
+    command:
+    - python
+    - api.py
+    labels:
+      io.rancher.container.pull_image: always
+  material-service:
+    image: registry.gitlab.com/eduqc/material-service:latest
+    environment:
+      MONGO_PORT: '27017'
+      MONGO_DBNAME: eduqc
+      MONGO_PASS: admin
+      MONGO_USER: admin
+      MONGO_HOST: mongodb://eduqc:wbgnNG25GjIvBuTW@devcluster-shard-00-00-a3weg.gcp.mongodb.net:27017,devcluster-shard-00-01-a3weg.gcp.mongodb.net:27017,devcluster-shard-00-02-a3weg.gcp.mongodb.net:27017/admin?replicaSet=DevCluster-shard-0&ssl=true
+    stdin_open: true
+    tty: true
+    command:
+    - python
+    - api.py
+    labels:
+      io.rancher.container.pull_image: always
+  material-history:
+    image: registry.gitlab.com/eduqc/material-history:latest
+    environment:
+      MONGO_PORT: '27017'
+      MONGO_USER: admin
+      MONGO_PASS: admin
+      MONGO_DBNAME: eduqc
+      MONGO_HOST: mongodb://eduqc:wbgnNG25GjIvBuTW@devcluster-shard-00-00-a3weg.gcp.mongodb.net:27017,devcluster-shard-00-01-a3weg.gcp.mongodb.net:27017,devcluster-shard-00-02-a3weg.gcp.mongodb.net:27017/admin?replicaSet=DevCluster-shard-0&ssl=true
+    stdin_open: true
+    tty: true
+    labels:
+      io.rancher.container.pull_image: always
+  agreement-service:
+    image: registry.gitlab.com/eduqc/agreement-service:latest
+    environment:
+      MONGO_PORT: '27017'
+      MONGO_USER: admin
+      MONGO_PASS: admin
+      MONGO_DBNAME: eduqc
+      MONGO_HOST: mongodb://eduqc:wbgnNG25GjIvBuTW@devcluster-shard-00-00-a3weg.gcp.mongodb.net:27017,devcluster-shard-00-01-a3weg.gcp.mongodb.net:27017,devcluster-shard-00-02-a3weg.gcp.mongodb.net:27017/admin?replicaSet=DevCluster-shard-0&ssl=true
+    stdin_open: true
+    tty: true
+    command:
+    - python
+    - api.py
+    labels:
+      io.rancher.container.pull_image: always
+  evaluation-history:
+    image: registry.gitlab.com/eduqc/evaluation-history:latest
+    environment:
+      MONGO_PORT: '27017'
+      MONGO_USER: admin
+      MONGO_PASS: admin
+      MONGO_DBNAME: eduqc
+      MONGO_HOST: mongodb://eduqc:wbgnNG25GjIvBuTW@devcluster-shard-00-00-a3weg.gcp.mongodb.net:27017,devcluster-shard-00-01-a3weg.gcp.mongodb.net:27017,devcluster-shard-00-02-a3weg.gcp.mongodb.net:27017/admin?replicaSet=DevCluster-shard-0&ssl=true
+    stdin_open: true
+    tty: true
+    logging:
+      driver: syslog
+    command:
+    - python
+    - api.py
+    labels:
+      io.rancher.container.pull_image: always
+  scheduler:
+    image: registry.gitlab.com/eduqc/scheduler:latest
+    environment:
+      MONGO_HOST: mongodb://eduqc:wbgnNG25GjIvBuTW@devcluster-shard-00-00-a3weg.gcp.mongodb.net:27017,devcluster-shard-00-01-a3weg.gcp.mongodb.net:27017,devcluster-shard-00-02-a3weg.gcp.mongodb.net:27017/admin?replicaSet=DevCluster-shard-0&ssl=true
+    stdin_open: true
+    tty: true
+    command:
+    - python
+    - api.py
+    labels:
+      io.rancher.container.pull_image: always
+  api-permission:
+    image: registry.gitlab.com/eduqc/api-permission:latest
+    environment:
+      MONGO_USER: admin
+      MONGO_PASS: admin
+      MONGO_HOST: mongodb://eduqc:wbgnNG25GjIvBuTW@devcluster-shard-00-00-a3weg.gcp.mongodb.net:27017,devcluster-shard-00-01-a3weg.gcp.mongodb.net:27017,devcluster-shard-00-02-a3weg.gcp.mongodb.net:27017/admin?replicaSet=DevCluster-shard-0&ssl=true
+      MONGO_PORT: '27017'
+      MONGO_DBNAME: eduqc
+    stdin_open: true
+    tty: true
+    command:
+    - python
+    - api.py
+    labels:
+      io.rancher.container.pull_image: always
+  area-service:
+    image: registry.gitlab.com/eduqc/area-service:latest
+    environment:
+      MONGO_PORT: '27017'
+      MONGO_DBNAME: eduqc
+      MONGO_USER: admin
+      MONGO_HOST_USER: users
+      MONGO_HOST: mongodb://eduqc:wbgnNG25GjIvBuTW@devcluster-shard-00-00-a3weg.gcp.mongodb.net:27017,devcluster-shard-00-01-a3weg.gcp.mongodb.net:27017,devcluster-shard-00-02-a3weg.gcp.mongodb.net:27017/admin?replicaSet=DevCluster-shard-0&ssl=true
+      MONGO_PASS: admin
+    stdin_open: true
+    tty: true
+    command:
+    - python
+    - api.py
+    labels:
+      io.rancher.container.pull_image: always
+  discursive-service:
+    image: registry.gitlab.com/eduqc/discursive-service:latest
+    environment:
+      MONGO_USER: admin
+      MONGO_PASS: admin
+      MONGO_DBNAME: eduqc
+      MONGO_HOST: mongodb://eduqc:wbgnNG25GjIvBuTW@devcluster-shard-00-00-a3weg.gcp.mongodb.net:27017,devcluster-shard-00-01-a3weg.gcp.mongodb.net:27017,devcluster-shard-00-02-a3weg.gcp.mongodb.net:27017/admin?replicaSet=DevCluster-shard-0&ssl=true
+    stdin_open: true
+    tty: true
+    command:
+    - python
+    - api.py
+    labels:
+      io.rancher.container.pull_image: always
+  schedule-service:
+    image: registry.gitlab.com/eduqc/schedule_service:latest
+    environment:
+      MONGO_PORT: '27017'
+      MONGO_USER: admin
+      MONGO_PASS: admin
+      MONGO_DBNAME: eduqc
+      MONGO_HOST: mongodb://eduqc:wbgnNG25GjIvBuTW@devcluster-shard-00-00-a3weg.gcp.mongodb.net:27017,devcluster-shard-00-01-a3weg.gcp.mongodb.net:27017,devcluster-shard-00-02-a3weg.gcp.mongodb.net:27017/admin?replicaSet=DevCluster-shard-0&ssl=true
+    stdin_open: true
+    tty: true
+    command:
+    - python
+    - api.py
+    labels:
+      io.rancher.container.pull_image: always
+  api-user-plan:
+    image: registry.gitlab.com/eduqc/api-user-plan:latest
+    environment:
+      MONGO_PORT: '27017'
+      MONGO_DBNAME: eduqc
+      MONGO_PASS: admin
+      MONGO_USER: admin
+      MONGO_HOST: mongodb://eduqc:wbgnNG25GjIvBuTW@devcluster-shard-00-00-a3weg.gcp.mongodb.net:27017,devcluster-shard-00-01-a3weg.gcp.mongodb.net:27017,devcluster-shard-00-02-a3weg.gcp.mongodb.net:27017/admin?replicaSet=DevCluster-shard-0&ssl=true
+    stdin_open: true
+    tty: true
+    command:
+    - python
+    - api.py
+    labels:
+      io.rancher.container.pull_image: always
+  api-user:
+    image: registry.gitlab.com/eduqc/api-user:latest
+    environment:
+      MONGO_PORT: '27017'
+      MONGO_DBNAME: eduqc
+      MONGO_PASS: admin
+      MONGO_USER: admin
+      MONGO_HOST: mongodb://eduqc:wbgnNG25GjIvBuTW@devcluster-shard-00-00-a3weg.gcp.mongodb.net:27017,devcluster-shard-00-01-a3weg.gcp.mongodb.net:27017,devcluster-shard-00-02-a3weg.gcp.mongodb.net:27017/admin?replicaSet=DevCluster-shard-0&ssl=true
+    stdin_open: true
+    entrypoint:
+    - python
+    - api.py
+    tty: true
+    labels:
+      io.rancher.container.pull_image: always
+  api-faq:
+    image: registry.gitlab.com/eduqc/api-faq:latest
+    environment:
+      MONGO_PORT: '27017'
+      MONGO_USER: admin
+      MONGO_PASS: admin
+      MONGO_DBNAME: eduqc
+      MONGO_HOST: mongodb://eduqc:wbgnNG25GjIvBuTW@devcluster-shard-00-00-a3weg.gcp.mongodb.net:27017,devcluster-shard-00-01-a3weg.gcp.mongodb.net:27017,devcluster-shard-00-02-a3weg.gcp.mongodb.net:27017/admin?replicaSet=DevCluster-shard-0&ssl=true
+    stdin_open: true
+    tty: true
+    command:
+    - python
+    - api.py
+    labels:
+      io.rancher.container.pull_image: always
+  api-module:
+    image: registry.gitlab.com/eduqc/api-module
+    environment:
+      MONGO_PORT: '27017'
+      MONGO_DB: eduqc
+      MONGO_PASS: admin
+      MONGO_USER: admin
+      MONGO_HOST: mongodb://eduqc:wbgnNG25GjIvBuTW@devcluster-shard-00-00-a3weg.gcp.mongodb.net:27017,devcluster-shard-00-01-a3weg.gcp.mongodb.net:27017,devcluster-shard-00-02-a3weg.gcp.mongodb.net:27017/admin?replicaSet=DevCluster-shard-0&ssl=true
+    stdin_open: true
+    entrypoint:
+    - python
+    - api.py
+    tty: true
+    labels:
+      io.rancher.container.pull_image: always
+  statistic-service:
+    image: registry.gitlab.com/eduqc/statistics:latest
+    environment:
+      MONGO_PORT: '27017'
+      MONGO_DBNAME: eduqc
+      MONGO_PASS: admin
+      MONGO_USER: admin
+      MONGO_HOST: mongodb://eduqc:wbgnNG25GjIvBuTW@devcluster-shard-00-00-a3weg.gcp.mongodb.net:27017,devcluster-shard-00-01-a3weg.gcp.mongodb.net:27017,devcluster-shard-00-02-a3weg.gcp.mongodb.net:27017/admin?replicaSet=DevCluster-shard-0&ssl=true
+    stdin_open: true
+    tty: true
+    command:
+    - python
+    - api.py
+    labels:
+      io.rancher.container.pull_image: always
+  simulation-service:
+    image: registry.gitlab.com/eduqc/simulation_service:latest
+    environment:
+      MONGO_PORT: '27017'
+      MONGO_DBNAME: eduqc
+      MONGO_USER: admin
+      MONGO_HOST_USER: users
+      MONGO_HOST: mongodb://eduqc:wbgnNG25GjIvBuTW@devcluster-shard-00-00-a3weg.gcp.mongodb.net:27017,devcluster-shard-00-01-a3weg.gcp.mongodb.net:27017,devcluster-shard-00-02-a3weg.gcp.mongodb.net:27017/admin?replicaSet=DevCluster-shard-0&ssl=true
+      MONGO_PASS: admin
+    stdin_open: true
+    tty: true
+    command:
+    - python
+    - api.py
+    labels:
+      io.rancher.container.pull_image: always
+  contest-service:
+    image: registry.gitlab.com/eduqc/contest-service:latest
+    environment:
+      MONGO_PORT: '27017'
+      MONGO_DBNAME: eduqc
+      MONGO_PASS: admin
+      MONGO_USER: admin
+      MONGO_HOST: mongodb://eduqc:wbgnNG25GjIvBuTW@devcluster-shard-00-00-a3weg.gcp.mongodb.net:27017,devcluster-shard-00-01-a3weg.gcp.mongodb.net:27017,devcluster-shard-00-02-a3weg.gcp.mongodb.net:27017/admin?replicaSet=DevCluster-shard-0&ssl=true
+    stdin_open: true
+    tty: true
+    command:
+    - python
+    - api.py
+    labels:
+      io.rancher.container.pull_image: always
