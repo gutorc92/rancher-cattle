@@ -8,3 +8,19 @@
     label: Mongo Host
     required: true
     type: string
+  - variable: MONGO_PORT
+    label: Mongo port
+    required: true
+    type: string
+  - variable: MONGO_USER
+    label: Mongo user
+    required: true
+    type: string
+  - variable: MONGO_PASS
+    label: Mongo pass
+    required: true
+    type: string
+  - variable: MONGO_DBNAME
+    label: Mongo db name
+    required: true
+    type: string
