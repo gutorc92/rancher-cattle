@@ -7,7 +7,7 @@ services:
       MONGO_USER: admin
       MONGO_PASS: admin
       MONGO_DBNAME: eduqc
-      MONGO_HOST: mongodb://eduqc:wbgnNG25GjIvBuTW@devcluster-shard-00-00-a3weg.gcp.mongodb.net:27017,devcluster-shard-00-01-a3weg.gcp.mongodb.net:27017,devcluster-shard-00-02-a3weg.gcp.mongodb.net:27017/admin?replicaSet=DevCluster-shard-0&ssl=true
+      MONGO_HOST: ${MONGO_HOST}
     stdin_open: true
     entrypoint:
     - python
@@ -23,7 +23,7 @@ services:
       MONGO_USER: admin
       MONGO_PASS: admin
       MONGO_DBNAME: eduqc
-      MONGO_HOST: mongodb://eduqc:wbgnNG25GjIvBuTW@devcluster-shard-00-00-a3weg.gcp.mongodb.net:27017,devcluster-shard-00-01-a3weg.gcp.mongodb.net:27017,devcluster-shard-00-02-a3weg.gcp.mongodb.net:27017/admin?replicaSet=DevCluster-shard-0&ssl=true
+      MONGO_HOST: ${MONGO_HOST}
     stdin_open: true
     tty: true
     command:
@@ -47,7 +47,7 @@ services:
       MONGO_USER: admin
       MONGO_PASS: admin
       MONGO_DBNAME: eduqc
-      MONGO_HOST: mongodb://eduqc:wbgnNG25GjIvBuTW@devcluster-shard-00-00-a3weg.gcp.mongodb.net:27017,devcluster-shard-00-01-a3weg.gcp.mongodb.net:27017,devcluster-shard-00-02-a3weg.gcp.mongodb.net:27017/admin?replicaSet=DevCluster-shard-0&ssl=true
+      MONGO_HOST: ${MONGO_HOST}
     stdin_open: true
     tty: true
     command:
@@ -63,7 +63,7 @@ services:
       SENTRY_DSN: https://04b827db99fd4c44abbad13c745eeb4b:a9a60914e31d4f9e976d064614ce1dfb@sentry.io/223014
       MONGO_DBNAME: eduqc
       MONGO_USER: admin
-      MONGO_HOST: mongodb://eduqc:wbgnNG25GjIvBuTW@devcluster-shard-00-00-a3weg.gcp.mongodb.net:27017,devcluster-shard-00-01-a3weg.gcp.mongodb.net:27017,devcluster-shard-00-02-a3weg.gcp.mongodb.net:27017/admin?replicaSet=DevCluster-shard-0&ssl=true
+      MONGO_HOST: ${MONGO_HOST}
       MONGO_PASS: admin
     stdin_open: true
     tty: true
@@ -81,7 +81,7 @@ services:
       MONGO_DBNAME: eduqc
       MONGO_PASS: admin
       MONGO_USER: admin
-      MONGO_HOST: mongodb://eduqc:wbgnNG25GjIvBuTW@devcluster-shard-00-00-a3weg.gcp.mongodb.net:27017,devcluster-shard-00-01-a3weg.gcp.mongodb.net:27017,devcluster-shard-00-02-a3weg.gcp.mongodb.net:27017/admin?replicaSet=DevCluster-shard-0&ssl=true
+      MONGO_HOST: ${MONGO_HOST}
     stdin_open: true
     tty: true
     command:
@@ -96,7 +96,7 @@ services:
       MONGO_USER: admin
       MONGO_PASS: admin
       MONGO_DBNAME: eduqc
-      MONGO_HOST: mongodb://eduqc:wbgnNG25GjIvBuTW@devcluster-shard-00-00-a3weg.gcp.mongodb.net:27017,devcluster-shard-00-01-a3weg.gcp.mongodb.net:27017,devcluster-shard-00-02-a3weg.gcp.mongodb.net:27017/admin?replicaSet=DevCluster-shard-0&ssl=true
+      MONGO_HOST: ${MONGO_HOST}
     stdin_open: true
     tty: true
     labels:
@@ -108,7 +108,7 @@ services:
       MONGO_USER: admin
       MONGO_PASS: admin
       MONGO_DBNAME: eduqc
-      MONGO_HOST: mongodb://eduqc:wbgnNG25GjIvBuTW@devcluster-shard-00-00-a3weg.gcp.mongodb.net:27017,devcluster-shard-00-01-a3weg.gcp.mongodb.net:27017,devcluster-shard-00-02-a3weg.gcp.mongodb.net:27017/admin?replicaSet=DevCluster-shard-0&ssl=true
+      MONGO_HOST: ${MONGO_HOST}
     stdin_open: true
     tty: true
     command:
@@ -123,7 +123,7 @@ services:
       MONGO_USER: admin
       MONGO_PASS: admin
       MONGO_DBNAME: eduqc
-      MONGO_HOST: mongodb://eduqc:wbgnNG25GjIvBuTW@devcluster-shard-00-00-a3weg.gcp.mongodb.net:27017,devcluster-shard-00-01-a3weg.gcp.mongodb.net:27017,devcluster-shard-00-02-a3weg.gcp.mongodb.net:27017/admin?replicaSet=DevCluster-shard-0&ssl=true
+      MONGO_HOST: ${MONGO_HOST}
     stdin_open: true
     tty: true
     logging:
@@ -136,7 +136,7 @@ services:
   scheduler:
     image: registry.gitlab.com/eduqc/scheduler:latest
     environment:
-      MONGO_HOST: mongodb://eduqc:wbgnNG25GjIvBuTW@devcluster-shard-00-00-a3weg.gcp.mongodb.net:27017,devcluster-shard-00-01-a3weg.gcp.mongodb.net:27017,devcluster-shard-00-02-a3weg.gcp.mongodb.net:27017/admin?replicaSet=DevCluster-shard-0&ssl=true
+      MONGO_HOST: ${MONGO_HOST}
     stdin_open: true
     tty: true
     command:
@@ -166,7 +166,7 @@ services:
       MONGO_DBNAME: eduqc
       MONGO_USER: admin
       MONGO_HOST_USER: users
-      MONGO_HOST: mongodb://eduqc:wbgnNG25GjIvBuTW@devcluster-shard-00-00-a3weg.gcp.mongodb.net:27017,devcluster-shard-00-01-a3weg.gcp.mongodb.net:27017,devcluster-shard-00-02-a3weg.gcp.mongodb.net:27017/admin?replicaSet=DevCluster-shard-0&ssl=true
+      MONGO_HOST: ${MONGO_HOST}
       MONGO_PASS: admin
     stdin_open: true
     tty: true
@@ -181,7 +181,7 @@ services:
       MONGO_USER: admin
       MONGO_PASS: admin
       MONGO_DBNAME: eduqc
-      MONGO_HOST: mongodb://eduqc:wbgnNG25GjIvBuTW@devcluster-shard-00-00-a3weg.gcp.mongodb.net:27017,devcluster-shard-00-01-a3weg.gcp.mongodb.net:27017,devcluster-shard-00-02-a3weg.gcp.mongodb.net:27017/admin?replicaSet=DevCluster-shard-0&ssl=true
+      MONGO_HOST: ${MONGO_HOST}
     stdin_open: true
     tty: true
     command:
@@ -196,7 +196,7 @@ services:
       MONGO_USER: admin
       MONGO_PASS: admin
       MONGO_DBNAME: eduqc
-      MONGO_HOST: mongodb://eduqc:wbgnNG25GjIvBuTW@devcluster-shard-00-00-a3weg.gcp.mongodb.net:27017,devcluster-shard-00-01-a3weg.gcp.mongodb.net:27017,devcluster-shard-00-02-a3weg.gcp.mongodb.net:27017/admin?replicaSet=DevCluster-shard-0&ssl=true
+      MONGO_HOST: ${MONGO_HOST}
     stdin_open: true
     tty: true
     command:
@@ -211,7 +211,7 @@ services:
       MONGO_DBNAME: eduqc
       MONGO_PASS: admin
       MONGO_USER: admin
-      MONGO_HOST: mongodb://eduqc:wbgnNG25GjIvBuTW@devcluster-shard-00-00-a3weg.gcp.mongodb.net:27017,devcluster-shard-00-01-a3weg.gcp.mongodb.net:27017,devcluster-shard-00-02-a3weg.gcp.mongodb.net:27017/admin?replicaSet=DevCluster-shard-0&ssl=true
+      MONGO_HOST: ${MONGO_HOST}
     stdin_open: true
     tty: true
     command:
@@ -226,7 +226,7 @@ services:
       MONGO_DBNAME: eduqc
       MONGO_PASS: admin
       MONGO_USER: admin
-      MONGO_HOST: mongodb://eduqc:wbgnNG25GjIvBuTW@devcluster-shard-00-00-a3weg.gcp.mongodb.net:27017,devcluster-shard-00-01-a3weg.gcp.mongodb.net:27017,devcluster-shard-00-02-a3weg.gcp.mongodb.net:27017/admin?replicaSet=DevCluster-shard-0&ssl=true
+      MONGO_HOST: ${MONGO_HOST}
     stdin_open: true
     entrypoint:
     - python
@@ -241,7 +241,7 @@ services:
       MONGO_USER: admin
       MONGO_PASS: admin
       MONGO_DBNAME: eduqc
-      MONGO_HOST: mongodb://eduqc:wbgnNG25GjIvBuTW@devcluster-shard-00-00-a3weg.gcp.mongodb.net:27017,devcluster-shard-00-01-a3weg.gcp.mongodb.net:27017,devcluster-shard-00-02-a3weg.gcp.mongodb.net:27017/admin?replicaSet=DevCluster-shard-0&ssl=true
+      MONGO_HOST: ${MONGO_HOST}
     stdin_open: true
     tty: true
     command:
@@ -256,7 +256,7 @@ services:
       MONGO_DB: eduqc
       MONGO_PASS: admin
       MONGO_USER: admin
-      MONGO_HOST: mongodb://eduqc:wbgnNG25GjIvBuTW@devcluster-shard-00-00-a3weg.gcp.mongodb.net:27017,devcluster-shard-00-01-a3weg.gcp.mongodb.net:27017,devcluster-shard-00-02-a3weg.gcp.mongodb.net:27017/admin?replicaSet=DevCluster-shard-0&ssl=true
+      MONGO_HOST: ${MONGO_HOST}
     stdin_open: true
     entrypoint:
     - python
@@ -271,7 +271,7 @@ services:
       MONGO_DBNAME: eduqc
       MONGO_PASS: admin
       MONGO_USER: admin
-      MONGO_HOST: mongodb://eduqc:wbgnNG25GjIvBuTW@devcluster-shard-00-00-a3weg.gcp.mongodb.net:27017,devcluster-shard-00-01-a3weg.gcp.mongodb.net:27017,devcluster-shard-00-02-a3weg.gcp.mongodb.net:27017/admin?replicaSet=DevCluster-shard-0&ssl=true
+      MONGO_HOST: ${MONGO_HOST}
     stdin_open: true
     tty: true
     command:
@@ -286,7 +286,7 @@ services:
       MONGO_DBNAME: eduqc
       MONGO_USER: admin
       MONGO_HOST_USER: users
-      MONGO_HOST: mongodb://eduqc:wbgnNG25GjIvBuTW@devcluster-shard-00-00-a3weg.gcp.mongodb.net:27017,devcluster-shard-00-01-a3weg.gcp.mongodb.net:27017,devcluster-shard-00-02-a3weg.gcp.mongodb.net:27017/admin?replicaSet=DevCluster-shard-0&ssl=true
+      MONGO_HOST: ${MONGO_HOST}
       MONGO_PASS: admin
     stdin_open: true
     tty: true
@@ -302,7 +302,7 @@ services:
       MONGO_DBNAME: eduqc
       MONGO_PASS: admin
       MONGO_USER: admin
-      MONGO_HOST: mongodb://eduqc:wbgnNG25GjIvBuTW@devcluster-shard-00-00-a3weg.gcp.mongodb.net:27017,devcluster-shard-00-01-a3weg.gcp.mongodb.net:27017,devcluster-shard-00-02-a3weg.gcp.mongodb.net:27017/admin?replicaSet=DevCluster-shard-0&ssl=true
+      MONGO_HOST: ${MONGO_HOST}
     stdin_open: true
     tty: true
     command:

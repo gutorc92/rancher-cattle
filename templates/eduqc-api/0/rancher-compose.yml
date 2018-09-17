@@ -3,3 +3,8 @@
   version: 7.5
   description: Api for eduqc services
   uuid: eduqc-0
+  questions:
+  - variable: MONGO_HOST
+    label: Mongo Host
+    required: true
+    type: string
